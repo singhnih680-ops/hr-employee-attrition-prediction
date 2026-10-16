@@ -1,38 +1,118 @@
-HR Attrition ML Pipeline
-An educational classification project using automatically generated synthetic employee records. The goal is to demonstrate a complete, understandable machine-learning workflow for HR attrition prediction.
-Business objective
-Identify possible future resignations to illustrate supportive retention review. This project does not establish causes of attrition and is not suitable for operational employee decisions.
-Dataset
-1,000 fictional employee records, plus 20 deliberately duplicated rows before cleaning. Inputs include experience, salary, satisfaction, overtime, absences, department and work mode. Missing values are deliberately introduced. Target: 0 = stayed, 1 = resigned within the following year. No real employee data is used.
-ML pipeline step by step
-1. Loading: Generate fictional records, save a CSV and load it with Pandas.
-2. Inspection: Examine shape, data types, missing values and repeated rows.
-3. Cleaning: Remove exact duplicates and validate basic target and feature ranges.
-4. Feature selection: Exclude identifiers and keep only information available at prediction time.
-5. Splitting: Use an 80/20 stratified training/test split before fitting preprocessing.
-6. EDA: Summarise and visualise training data; examine imbalance and descriptive patterns.
-7. Imputation: Learn numerical medians and categorical modes on training data.
-8. Scaling: Fit StandardScaler on training numbers and reuse it for other inputs.
-9. SMOTE: Apply SMOTENC only to training data because inputs contain numbers and categories.
-10. Encoding: Learn one-hot categories from original training data and transform each model input.
-11. Training: Fit Logistic Regression with and without oversampling.
-12. Evaluation: Compare accuracy, precision, recall, F1 and confusion matrices on the same untouched test set.
-13. Interpretation: Describe missed resignations, false flags, limitations and human review.
-14. Prediction: Reuse every fitted preprocessing component for a new fictional employee.
-15. Saving: Export results, cleaned data and fitted preprocessing/model components.
-Tools
-Python, Pandas, NumPy, Matplotlib, Scikit-learn, imbalanced-learn, Joblib and Google Colab.
-Results
-Insert the actual baseline and SMOTENC results from the notebook. Report tradeoffs honestly; do not assume that oversampling improved every metric.
-Running the project
-Open the notebook in Google Colab, use a CPU runtime and run all cells from top to bottom. The setup cell installs the specified package versions. The dataset is created automatically.
-Files
-- HR_Attrition_Monday_Complete_Pipeline.ipynb — guided notebook
-- hr_attrition_raw.csv — generated teaching data
-- hr_attrition_cleaned.csv — deduplicated data; fitted imputation remains training-only
-- model_comparison.csv — observed evaluation scores
-- hr_attrition_teaching_model.joblib — fitted preprocessing components and classifier
-Limitations and responsible use
-Synthetic data cannot demonstrate real-world effectiveness. Oversampling creates examples rather than evidence; scores can need calibration. Group associations and coefficients do not show causation. Evaluation here is a teaching comparison, not production model selection. Real deployment requires representative data, validation, privacy controls, fairness review, human oversight and monitoring. Load saved models only from trusted sources.
-Learning outcomes
-Data loading, cleaning, EDA, leakage-aware preprocessing, imbalance handling, classification, evaluation and business interpretation.
+# 📊 HR Attrition ML Pipeline
+
+An educational machine learning project that demonstrates an end-to-end workflow for **predicting employee attrition** using automatically generated synthetic HR data. The project covers data cleaning, exploratory data analysis, preprocessing, class imbalance handling, model training, evaluation, and interpretation.
+
+## 🎯 Business Objective
+
+Identify employees who may resign in the future to demonstrate how HR analytics can support employee retention reviews.
+
+⚠️ This project is educational only. It does not establish the causes of attrition and must not be used to make real employment decisions.
+
+## 📁 Dataset Overview
+
+- 👥 **Employee records:** 1,000 fictional records
+- 🔁 **Duplicate records:** 20 deliberately duplicated rows before cleaning
+- 🎯 **Target variable:** `Resigned`
+  - `0` = Employee stayed
+  - `1` = Employee resigned within the following year
+- 🧩 **Features include:** Experience, salary, satisfaction, overtime, absences, department, and work mode
+- 🕳️ **Missing values:** Deliberately introduced for preprocessing practice
+- 🔒 **Data privacy:** No real employee data is used
+
+## ⚙️ ML Pipeline — Step by Step
+
+1. 📥 **Data Loading:** Generate fictional employee records, save them as a CSV file, and load them using Pandas.
+2. 🔍 **Data Inspection:** Examine dataset shape, data types, missing values, and duplicate records.
+3. 🧹 **Data Cleaning:** Remove exact duplicates and validate basic target and feature ranges.
+4. 🎯 **Feature Selection:** Exclude identifiers and retain information available at prediction time.
+5. ✂️ **Train-Test Split:** Split the data into 80% training and 20% testing sets using stratification.
+6. 📊 **Exploratory Data Analysis (EDA):** Visualise training data, examine class imbalance, and explore descriptive patterns.
+7. 🩹 **Missing Value Imputation:** Learn numerical medians and categorical modes from the training data.
+8. 📏 **Feature Scaling:** Fit `StandardScaler` on training data and reuse it for other inputs.
+9. ⚖️ **Class Imbalance Handling:** Apply `SMOTENC` only to training data because the dataset contains numerical and categorical features.
+10. 🔠 **Categorical Encoding:** Learn one-hot categories from the original training data and transform model inputs.
+11. 🤖 **Model Training:** Train Logistic Regression models with and without oversampling.
+12. 📈 **Model Evaluation:** Compare accuracy, precision, recall, F1-score, and confusion matrices on the same untouched test set.
+13. 🧠 **Result Interpretation:** Discuss missed resignations, false-positive predictions, limitations, and the need for human review.
+14. 🔮 **Prediction:** Reuse fitted preprocessing components to predict for a new fictional employee.
+15. 💾 **Model Saving:** Export evaluation results, cleaned data, and fitted preprocessing and model components.
+
+## 🛠️ Tools & Technologies
+
+- 🐍 Python
+- 🐼 Pandas
+- 🔢 NumPy
+- 📊 Matplotlib
+- 🤖 Scikit-learn
+- ⚖️ imbalanced-learn
+- 💾 Joblib
+- ☁️ Google Colab
+
+## 📈 Model Results
+
+The project compares two Logistic Regression models:
+
+- **Baseline Model:** Trained without oversampling.
+- **SMOTENC Model:** Trained with synthetic minority-class samples generated using SMOTENC.
+
+Evaluate both models using:
+
+- Accuracy
+- Precision
+- Recall
+- F1-score
+- Confusion matrix
+
+📌 **Important:** Insert the actual evaluation scores generated by the notebook here. Do not assume that oversampling improves every metric. Discuss the trade-offs honestly, especially between detecting resignations and incorrectly flagging employees who stay.
+
+## 🚀 How to Run the Project
+
+1. Download or clone this repository.
+2. Open `HR_Attrition_Monday_Complete_Pipeline.ipynb` in [Google Colab](https://colab.research.google.com/).
+3. Select a CPU runtime.
+4. Run all cells from top to bottom.
+5. Allow the setup cell to install the specified package versions.
+6. Review the generated dataset, visualisations, model evaluation results, and saved outputs.
+
+✅ The dataset is generated automatically by the notebook, so no external employee dataset is required.
+
+## 📂 Project Files
+
+- 📓 `HR_Attrition_Monday_Complete_Pipeline.ipynb` — Guided Jupyter notebook containing the complete ML workflow.
+- 📄 `hr_attrition_raw.csv` — Automatically generated teaching dataset.
+- 🧹 `hr_attrition_cleaned.csv` — Dataset after duplicate removal.
+- 📊 `model_comparison.csv` — Observed evaluation scores for the models.
+- 💾 `hr_attrition_teaching_model.joblib` — Saved fitted preprocessing components and classifier.
+
+*Note: Generated files become available after the relevant notebook cells have been executed.*
+
+## ⚠️ Limitations & Responsible Use
+
+- Synthetic data cannot establish real-world model effectiveness.
+- Oversampling generates synthetic examples; it does not provide additional evidence about real employees.
+- Model scores may require calibration and further validation.
+- Feature associations and model coefficients do not establish causation.
+- This is a teaching comparison, not production model selection.
+- Real-world use would require representative data, rigorous validation, privacy controls, fairness review, human oversight, and ongoing monitoring.
+- Only load saved models from trusted sources.
+
+🚫 **Never use this educational model as the sole basis for hiring, firing, promotion, or other employment decisions.**
+
+## 🎓 Learning Outcomes
+
+By completing this project, learners gain practical experience in:
+
+- Data loading and cleaning
+- Exploratory data analysis
+- Leakage-aware preprocessing
+- Handling missing values
+- Class imbalance management
+- Classification model development
+- Model evaluation and interpretation
+- Applying machine learning concepts to HR analytics
+
+## 👩‍💻 Project Purpose
+
+This project demonstrates how machine learning techniques can be explored in an HR context while highlighting the importance of responsible interpretation, data quality, and human judgement.
+
+⭐ If you find this project useful for learning HR analytics and machine learning, consider starring the repository!
